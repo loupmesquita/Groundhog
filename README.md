@@ -45,6 +45,8 @@ Eventually, once the keyword is entered, it must output:
 
     make tests_ground
 
+    make clean_ground
+
 ## Exemple 
 
 ![Screenshot_20210405_144333](https://user-images.githubusercontent.com/57537562/113574916-5c330e80-961d-11eb-8ed9-babdfb2e2766.png)
