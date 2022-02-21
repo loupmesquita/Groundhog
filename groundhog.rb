@@ -7,95 +7,9 @@
 ## ground
 ##
 
-module Utils
-  def Utils.help()
-    #test
-    if ARGV[0] == "-h"
-      puts "SYNOPSIS"
-      puts "\t./groundhog period"
-      puts "DESCRIPTION"
-      puts "\tperiod\tthe number of days defining a period"
-      exit()
-    end
-    a = 0
-  end
-  
-  def Utils.is_number? string
-    true if Float(string) rescue false
-  end
+require "./Utils.rb"
+require "./Algorythm.rb"
 
-  def Utils.printWeirdValues(tab_ab, switch)
-    Algorythm.bubbleSort(tab_ab)
-    if ((tab_ab.length)/2) < 5
-      nbw = (tab_ab.length)/2
-    else nbw = 5
-    end
-    
-    puts "Global tendency switched #{switch} times"
-    print "#{nbw} weirdest values are ["
-    if ((tab_ab.length)/2) == 1
-      print tab_ab[[0,0]]
-    end
-    if ((tab_ab.length)/2) < 5
-      m = 0
-      for i in 0..((tab_ab.length)/2) - 2
-        print (tab_ab[[i, 0]])
-        print ", "
-        m = i
-      end 
-      print tab_ab[[m+1,0]]
-    else 
-      for k in 0..3
-        print (tab_ab[[k, 0]])
-        print ", "
-      end
-      print tab_ab[[4,0]]
-    end 
-    
-    puts "]"
-  end
-  
-end
-
-module Algorythm
-  def Algorythm.aberrations(standev, moy, one, tab_ab, tab_abinc)
-    
-    bplus = (moy + (standev * 2))
-    bminus = (moy - (standev * 2))
-    if (bplus - one.to_f) < (one.to_f - bminus)
-      res = (bplus - one.to_f)/(bplus - bminus)
-    else res = (one.to_f - bminus)/(bplus - bminus)
-    end 
-    tab_ab[[tab_abinc,0]]= one.to_f
-    tab_ab[[tab_abinc,1]]= res
-  end
-  
-  def Algorythm.bubbleSort(tab)
-    i = ((tab.length)/2) - 1
-    j = 0
-    while i!=0
-      table = true
-      for j in 0..(i-1)
-        if ((tab[[j+1, 1]].to_f) < (tab[[j, 1]].to_f))
-          tab[[(j+1), 1]], tab[[j, 1]] = tab[[j, 1]], tab[[(j+1), 1]]
-          tab[[(j+1), 0]], tab[[j, 0]] = tab[[j, 0]], tab[[(j+1), 0]]
-          table = false
-        end
-      end
-      break if table
-      i -= 1
-    end
-  end 
-
-end
-
-# if ARGV[0] == "-h"
-#   puts "SYNOPSIS"
-#   puts "\t./groundhog period"
-#   puts "DESCRIPTION"
-#   puts "\tperiod\tthe number of days defining a period"
-#   exit()
-# end
 
 arg = ARGV[0]
 if (ARGV.length > 1 || ARGV.length < 1)
@@ -183,6 +97,8 @@ while (1)
     tab_abinc -= -1
     puts ("g=nan\tr=nan"+ "%" + "\ts=%.2f" %standev) 
   else
+
+    #calc of Temperature increase average
     x = arg -1
     y = arg -1
     if (one_f.to_f - (tab[o-1].to_f)) >= 0
