@@ -63,4 +63,4 @@ Eventually, once the keyword is entered, it must output:
 | errors | 100% |
 | timing of switches | 100% |
 
-# Loup mesquita
+# EPITECH project made by Loup mesquita
